@@ -1,0 +1,260 @@
+{% extends 'bloodbank/base_modern.html' %}
+
+{% block title %}Login - LifeServe Blood Bank{% endblock %}
+
+{% block content %}
+<div class="container mt-5 pt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-lg">
+                <div class="card-header bg-gradient-primary text-white text-center p-4">
+                    <i class="bi bi-box-arrow-in-right display-4 mb-3"></i>
+                    <h3 class="mb-0">Welcome Back</h3>
+                    <p class="mb-0">Login to your LifeServe account</p>
+                </div>
+                <div class="card-body p-5">
+                    {% if form.errors %}
+                        <div class="alert alert-danger">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-exclamation-triangle me-2"></i>
+                                <div>
+                                    {% for field, errors in form.errors.items %}
+                                        {% for error in errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    
+                    <form method="post" action="{% url 'login' %}" id="loginForm">
+                        {% csrf_token %}
+                        
+                        <div class="form-group mb-4">
+                            <label for="username" class="form-label">
+                                <i class="bi bi-person"></i> Username
+                            </label>
+                            <div class="input-group position-relative">
+                                <span class="input-group-text">
+                                    <i class="bi bi-person"></i>
+                                </span>
+                                <input type="text" class="form-control" name="username" id="username" required 
+                                       autocomplete="username" 
+                                       placeholder="Enter your username">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group mb-4">
+                            <label for="password" class="form-label">
+                                <i class="bi bi-lock"></i> Password
+                            </label>
+                            <div class="input-group position-relative">
+                                <span class="input-group-text">
+                                    <i class="bi bi-lock"></i>
+                                </span>
+                                <input type="password" class="form-control" name="password" id="password" required 
+                                       autocomplete="current-password"
+                                       placeholder="Enter your password">
+                                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group mb-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="rememberMe">
+                                <label class="form-check-label" for="rememberMe">
+                                    Remember me
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid mb-4">
+                            <button type="submit" class="btn btn-danger btn-lg" id="loginBtn">
+                                <i class="bi bi-box-arrow-in-right me-2"></i> Login
+                            </button>
+                        </div>
+                    </form>
+                    
+                    {% comment %} <div class="text-center mb-4">
+                        <a href="#" class="text-primary text-decoration-none">Forgot password?</a>
+                    </div>
+                     {% endcomment %}
+                    <hr>
+                    
+                    
+                    <div class="text-center">
+                        <p class="mb-0">Don't have an account? <a href="{% url 'register' %}" class="text-primary text-decoration-none">Register here</a></p>
+                    </div>
+                    
+                    <!-- Quick Access Cards -->
+                    <div class="mt-4">
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <div class="card border-primary bg-light">
+                                    <div class="card-body text-center p-3">
+                                        <i class="bi bi-person-heart text-primary fs-4 mb-2"></i>
+                                        <h6 class="card-title mb-1">Patient Portal</h6>
+                                        <small class="text-muted">Request blood</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="card border-success bg-light">
+                                    <div class="card-body text-center p-3">
+                                        <i class="bi bi-heart-pulse text-success fs-4 mb-2"></i>
+                                        <h6 class="card-title mb-1">Donor Portal</h6>
+                                        <small class="text-muted">Save lives</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Demo Section -->
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 bg-gradient-primary text-white">
+                <div class="card-body p-5">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h3 class="mb-3">New to LifeServe?</h3>
+                            <p class="mb-4">Join our community of life-savers. Register today to start making a difference in healthcare.</p>
+                            <div class="d-flex gap-3 flex-wrap">
+                                <a href="{% url 'register' %}" class="btn btn-light">
+                                    <i class="bi bi-person-plus me-2"></i> Register Now
+                                </a>
+                                <a href="#" class="btn btn-outline-light">
+                                    <i class="bi bi-info-circle me-2"></i> Learn More
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <i class="bi bi-droplet-fill" style="font-size: 5rem; opacity: 0.3;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.bg-gradient-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label i {
+    margin-right: 0.5rem;
+    color: var(--primary-color);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    border: none;
+}
+
+.btn-danger:hover {
+    background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.card {
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.card-header {
+    border-radius: 20px 20px 0 0 !important;
+}
+
+.input-group-text {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(118, 75, 162, 0.25);
+}
+
+#togglePassword {
+    border-left: none;
+}
+
+#togglePassword:hover {
+    background-color: rgba(118, 75, 162, 0.1);
+}
+
+/* Quick access cards */
+.card.border-primary {
+    border-width: 2px;
+    transition: all 0.3s ease;
+}
+
+.card.border-primary:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.card.border-success:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+</style>
+
+<script>
+document.getElementById('togglePassword').addEventListener('click', function() {
+    const passwordInput = document.getElementById('password');
+    const icon = this.querySelector('i');
+    
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        icon.classList.remove('bi-eye');
+        icon.classList.add('bi-eye-slash');
+    } else {
+        passwordInput.type = 'password';
+        icon.classList.remove('bi-eye-slash');
+        icon.classList.add('bi-eye');
+    }
+});
+
+// End of Custom Login Script
+
+// 6. Clear aggressive browser auto-fill on page load so it always starts blank
+window.addEventListener('load', function() {
+    setTimeout(function() {
+        document.getElementById('username').value = '';
+        document.getElementById('password').value = '';
+    }, 100);
+});
+
+// Quick access card clicks
+document.querySelectorAll('.card.border-primary, .card.border-success').forEach(card => {
+    card.addEventListener('click', function() {
+        if (this.classList.contains('border-primary')) {
+            // Redirect to registration with patient role pre-selected
+            window.location.href = '{% url "register" %}?role=patient';
+        } else if (this.classList.contains('border-success')) {
+            // Redirect to registration with donor role pre-selected
+            window.location.href = '{% url "register" %}?role=donor';
+        }
+    });
+});
+</script>
+{% endblock %}

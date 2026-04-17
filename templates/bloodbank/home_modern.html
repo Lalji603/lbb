@@ -1,0 +1,214 @@
+{% extends 'bloodbank/base_modern.html' %}
+
+{% block title %}Home - LifeServe Blood Bank{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section text-white py-5 hero-pattern">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-12">
+                <div class="hero-content text-center">
+                    <h1 class="display-4 fw-bold mb-4">Welcome to LifeServe Blood Bank</h1>
+                    <p class="lead mb-4">Connecting donors with patients in need. Every donation saves a life. Join our mission to make a
+                            difference.</p>
+                    <div class="d-flex justify-content-center gap-3">
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'dashboard' %}" class="btn btn-light btn-lg">
+                                <i class="bi bi-speedometer2 me-2"></i>Go to Dashboard
+                            </a>
+                        {% else %}
+                            <a href="{% url 'register' %}" class="btn btn-light btn-lg">
+                                <i class="bi bi-person-plus me-2"></i>Register Now
+                            </a>
+                            <a href="{% url 'login' %}" class="btn btn-light btn-lg">
+                                <i class="bi bi-box-arrow-in-right me-2"></i>Login
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quick Actions Section -->
+<section class="quick-actions-section py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="display-5 fw-bold gradient-text">Quick Actions</h2>
+                <p class="lead text-muted">What would you like to do today?</p>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-4 col-sm-6 mb-4">
+                <div class="action-card text-center p-4 rounded-3 shadow-sm h-100">
+                    <div class="action-icon mb-3">
+                        <i class="bi bi-droplet-fill" style="color: var(--primary-color); font-size: 3rem;"></i>
+                    </div>
+                    <h4 class="mb-3">Donate Blood</h4>
+                    <p class="text-muted mb-4">Save lives by donating blood today</p>
+                    <div class="text-center">
+                        <a href="{% url 'register' %}" class="btn" style="background: var(--primary-color); color: white;">Get Started</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 mb-4">
+                <div class="action-card text-center p-4 rounded-3 shadow-sm h-100">
+                    <div class="action-icon mb-3">
+                        <i class="bi bi-clipboard2-pulse-fill" style="color: var(--success-color); font-size: 3rem;"></i>
+                    </div>
+                    <h4 class="mb-3">Request Blood</h4>
+                    <p class="text-muted mb-4">Find blood donors for patients in need</p>
+                    <div class="text-center">
+                        <a href="{% url 'request_blood' %}" class="btn" style="background: var(--success-color); color: white;">Request Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Blood Types Needed Section -->
+<section class="blood-types-section py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="display-5 fw-bold gradient-text">Blood Types Needed</h2>
+                <p class="lead text-muted">Current blood stock availability</p>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            {% for stock in blood_stocks %}
+            <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4">
+                <div class="blood-type-card text-center p-3 rounded-3 shadow-sm h-100">
+                    <div class="blood-type-icon mb-2">
+                        <div class="blood-drop" style="background: var(--primary-color);">
+                            {{ stock.blood_group }}
+                        </div>
+                    </div>
+                    <h5 class="mb-1 fw-bold">{{ stock.blood_group }}</h5>
+                    <span class="badge bg-success mt-2">Available</span>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center py-5">
+                <i class="bi bi-droplet" style="font-size: 3rem; color: var(--muted-color);"></i>
+                <p class="text-muted mt-3">No blood stock data available</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Emergency Contact Section -->
+<section class="emergency-section py-5 text-white" style="background: var(--gradient-primary);">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-12">
+                <h2 class="display-5 fw-bold mb-4">Emergency Blood Needed?</h2>
+                <p class="lead mb-4">For urgent blood requirements, contact our 24/7 emergency helpline</p>
+                <div class="d-flex justify-content-center align-items-center gap-4">
+                    <div class="emergency-contact">
+                        <i class="bi bi-telephone-fill me-2" style="font-size: 1.5rem;"></i>
+                        <span class="fw-bold fs-4">1-800-BLOOD</span>
+                    </div>
+                    <div class="emergency-time">
+                        <i class="bi bi-clock-fill me-2" style="font-size: 1.5rem;"></i>
+                        <span class="fw-bold">24/7 Available</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background-attachment: fixed;
+}
+
+.hero-section {
+    background: var(--gradient-primary);
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+}
+
+.quick-actions-section {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background-attachment: fixed;
+}
+
+.blood-types-section {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+}
+
+.blood-type-card {
+    transition: transform 0.3s ease;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+}
+
+.blood-type-card:hover {
+    transform: translateY(-5px);
+}
+
+.blood-drop {
+    width: 60px;
+    height: 60px;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin: 0 auto;
+    position: relative;
+}
+
+.blood-drop::before {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+}
+
+.action-card {
+    transition: transform 0.3s ease;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+}
+
+.action-card:hover {
+    transform: translateY(-10px);
+}
+
+.action-icon {
+    transition: transform 0.3s ease;
+}
+
+.action-icon:hover {
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        min-height: 40vh;
+    }
+    
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+}
+</style>
+{% endblock %}
