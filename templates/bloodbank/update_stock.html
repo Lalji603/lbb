@@ -1,0 +1,138 @@
+{% extends 'bloodbank/base_modern.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Update Blood Stock - LifeServe Blood Bank{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <!-- Page Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="h2 mb-2 animate-fade-in">
+                        <i class="bi bi-droplet-fill text-danger"></i> Update Blood Stock
+                    </h1>
+                    <p class="text-muted animate-slide-up">Manage and update blood inventory levels</p>
+                </div>
+                <div>
+                    <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary animate-scale-up">
+                        <i class="bi bi-arrow-left"></i> Back to Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Update Stock Form -->
+    <div class="row mb-4">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-lg animate-slide-up">
+                <div class="card-header bg-gradient-danger text-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="mb-0">
+                            <i class="bi bi-pencil-square"></i> Stock Update Form
+                        </h4>
+                        <span class="badge bg-light text-danger">
+                            <i class="bi bi-exclamation-circle"></i> Admin Only
+                        </span>
+                    </div>
+                </div>
+                <div class="card-body p-4">
+                    <form method="post" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                            <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary me-md-2">
+                                <i class="bi bi-x-circle"></i> Cancel
+                            </a>
+                            <button type="submit" class="btn btn-danger">
+                                <i class="bi bi-save"></i> Update Stock
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Current Stock Information -->
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-lg animate-slide-up" style="animation-delay: 0.1s;">
+                <div class="card-header bg-gradient-info text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-info-circle"></i> Current Stock Info
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label class="form-label text-muted">Blood Group</label>
+                        <h4 class="text-danger">{{ form.instance.blood_group|default:"Not Selected" }}</h4>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label text-muted">Current Units</label>
+                        <h3 class="text-primary">{{ form.instance.units|default:"0" }}</h3>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label text-muted">Last Updated</label>
+                        <p class="text-muted">{{ form.instance.last_updated|date:"M d, Y H:i"|default:"Never" }}</p>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label text-muted">Recommended Minimum</label>
+                        <p class="text-muted">50 units</p>
+                    </div>
+                    
+                    {% if form.instance.units < 50 %}
+                    <div class="alert alert-warning border-0 animate-pulse">
+                        <i class="bi bi-exclamation-triangle-fill"></i>
+                        <strong>Low Stock Alert!</strong><br>
+                        <small>Current stock is below recommended minimum. Please consider organizing a blood drive.</small>
+                    </div>
+                    {% else %}
+                    <div class="alert alert-success border-0">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <strong>Stock Level Good</strong><br>
+                        <small>Current stock is at safe levels.</small>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Quick Actions -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card border-0 shadow-lg animate-slide-up" style="animation-delay: 0.2s;">
+                <div class="card-header bg-gradient-secondary text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-lightning"></i> Quick Actions
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <a href="{% url 'dashboard' %}" class="btn btn-outline-primary w-100">
+                                <i class="bi bi-speedometer2"></i> Dashboard
+                            </a>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <a href="{% url 'request_list' %}" class="btn btn-outline-info w-100">
+                                <i class="bi bi-list-ul"></i> View Requests
+                            </a>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <a href="{% url 'user_list' %}" class="btn btn-outline-success w-100">
+                                <i class="bi bi-people"></i> Manage Users
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

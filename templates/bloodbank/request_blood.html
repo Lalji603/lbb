@@ -1,0 +1,102 @@
+{% extends 'bloodbank/base_modern.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Request Blood - LifeServe Blood Bank{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card border-0 shadow">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0"><i class="bi bi-droplet"></i> Blood Request Form</h4>
+                </div>
+                <div class="card-body p-4">
+                    <form method="post" id="bloodRequestForm" onsubmit="return preventDoubleSubmit()">
+                        {% csrf_token %}
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ form.blood_group|as_crispy_field }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form.units_required|as_crispy_field }}
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ form.urgency|as_crispy_field }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form.required_date|as_crispy_field }}
+                            </div>
+                        </div>
+                        
+                        {{ form.hospital_name|as_crispy_field }}
+                        {{ form.hospital_address|as_crispy_field }}
+                        {{ form.doctor_name|as_crispy_field }}
+                        {{ form.reason|as_crispy_field }}
+                        
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="{% url 'dashboard' %}" class="btn btn-secondary me-md-2">
+                                <i class="bi bi-x-circle"></i> Cancel
+                            </a>
+                            <button type="submit" id="submitBtn" class="btn btn-danger">
+                                <i id="submitIcon" class="bi bi-send"></i> <span id="submitText">Submit Request</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Important Information -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card border-warning">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="mb-0"><i class="bi bi-exclamation-triangle"></i> Important Information</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Emergency Requests</h6>
+                            <p>For urgent blood requirements, please mark the urgency as "Critical" and contact our 24/7 hotline at 1-800-RED-CROSS.</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Processing Time</h6>
+                            <p>Normal requests are typically processed within 24-48 hours. Critical requests are given priority and processed immediately.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('id_units_required').addEventListener('input', function() {
+    const units = parseInt(this.value) || 0;
+    if (units > 10) {
+        alert('For requests requiring more than 10 units, please contact our hospital liaison directly.');
+    }
+});
+
+function preventDoubleSubmit() {
+    const btn = document.getElementById('submitBtn');
+    if (btn.disabled) return false;
+    
+    btn.disabled = true;
+    document.getElementById('submitText').innerText = 'Submitting...';
+    
+    const icon = document.getElementById('submitIcon');
+    if (icon) {
+        icon.className = 'spinner-border spinner-border-sm me-1';
+    }
+    
+    return true;
+}
+</script>
+{% endblock %}
