@@ -1,0 +1,507 @@
+{% extends 'bloodbank/base_modern.html' %}
+{% load static %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12">
+            <!-- Hero Section -->
+            <div class="hero-section text-center mb-5">
+                <div class="hero-content">
+                    <h1 class="display-3 text-danger mb-4 animate-fade-in">
+                        <i class="bi bi-envelope-fill"></i> Contact LifeServe Blood Bank
+                    </h1>
+                    <h2 class="h4 text-muted mb-4 animate-slide-up">We're here to help 24/7</h2>
+                    <p class="lead mb-4 animate-slide-up-delay">
+                        Get in touch with us for blood requests, emergencies, or any questions about our services
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Contact Information -->
+                <div class="col-lg-12 mb-4">
+                    <div class="contact-info-card animate-scale-up-delay">
+                        <div class="card-header">
+                            <h3 class="mb-0">
+                                <i class="bi bi-geo-alt"></i> Contact Information
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="contact-methods">
+                                <div class="contact-item">
+                                    <div class="contact-icon">
+                                        <i class="bi bi-geo-alt-fill"></i>
+                                    </div>
+                                    <div class="contact-details">
+                                        <h5>Address</h5>
+                                        <p>{{ contact_info.address }}</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-item">
+                                    <div class="contact-icon">
+                                        <i class="bi bi-telephone-fill"></i>
+                                    </div>
+                                    <div class="contact-details">
+                                        <h5>Phone</h5>
+                                        <p><a href="tel:{{ contact_info.phone }}" class="text-danger">{{ contact_info.phone }}</a></p>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-item">
+                                    <div class="contact-icon">
+                                        <i class="bi bi-envelope-fill"></i>
+                                    </div>
+                                    <div class="contact-details">
+                                        <h5>Email</h5>
+                                        <p><a href="mailto:{{ contact_info.email }}" class="text-danger">{{ contact_info.email }}</a></p>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-item">
+                                    <div class="contact-icon">
+                                        <i class="bi bi-clock-fill"></i>
+                                    </div>
+                                    <div class="contact-details">
+                                        <h5>Working Hours</h5>
+                                        <p>{{ contact_info.working_hours }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emergency Services -->
+            <div class="emergency-section mb-5">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="emergency-card animate-slide-up">
+                            <div class="emergency-header">
+                                <h2 class="text-white mb-0">
+                                    <i class="bi bi-exclamation-triangle"></i> Emergency Services
+                                </h2>
+                            </div>
+                            <div class="emergency-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <div class="emergency-item">
+                                            <div class="emergency-icon">
+                                                <i class="bi bi-telephone"></i>
+                                            </div>
+                                            <div class="emergency-details">
+                                                <h4>Emergency Hotline</h4>
+                                                <p class="lead"><a href="tel:{{ contact_info.emergency_hotline }}" class="text-warning">{{ contact_info.emergency_hotline }}</a></p>
+                                                <p class="mb-0">Available 24 hours a day, 7 days a week</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <div class="emergency-item">
+                                            <div class="emergency-icon">
+                                                <i class="bi bi-hospital"></i>
+                                            </div>
+                                            <div class="emergency-details">
+                                                <h4>Hospital Services</h4>
+                                                <p class="lead"><a href="tel:{{ contact_info.phone }}" class="text-warning">{{ contact_info.phone }}</a></p>
+                                                <p class="mb-0">{{ contact_info.working_hours }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="emergency-features">
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <div class="feature-item">
+                                                <i class="bi bi-lightning-fill"></i>
+                                                <h6>Fast Response</h6>
+                                                <p>Immediate response to emergency blood requests</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <div class="feature-item">
+                                                <i class="bi bi-shield-check"></i>
+                                                <h6>Verified Donors</h6>
+                                                <p>All donors are medically screened and verified</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <div class="feature-item">
+                                                <i class="bi bi-truck"></i>
+                                                <h6>Quick Delivery</h6>
+                                                <p>Rapid blood delivery to hospitals</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 4rem 2rem;
+    border-radius: 1rem;
+    margin-bottom: 3rem;
+}
+
+.hero-content h1 {
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.hero-content h2 {
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+}
+
+.hero-content p {
+    max-width: 600px;
+    margin: 0 auto 2rem;
+}
+
+/* Contact Form Card */
+.contact-form-card {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.contact-form-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.contact-form-card .card-header {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    border: none;
+}
+
+.contact-form-card .card-header h3 {
+    margin: 0;
+    font-weight: 600;
+}
+
+/* Contact Info Card */
+.contact-info-card {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.contact-info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.contact-info-card .card-header {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    border: none;
+}
+
+.contact-info-card .card-header h3 {
+    margin: 0;
+    font-weight: 600;
+}
+
+/* Contact Items */
+.contact-item {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid #f8f9fa;
+}
+
+.contact-item:last-child {
+    border-bottom: none;
+}
+
+.contact-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1.5rem;
+    color: white;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.contact-details h5 {
+    color: #dc3545;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.contact-details p {
+    margin: 0;
+    color: #6c757d;
+}
+
+/* Emergency Section */
+.emergency-section {
+    margin-top: 3rem;
+}
+
+.emergency-card {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.emergency-header {
+    padding: 2rem;
+    text-align: center;
+}
+
+.emergency-header h2 {
+    margin: 0;
+    font-weight: 700;
+}
+
+.emergency-body {
+    background: white;
+    padding: 2rem;
+}
+
+.emergency-item {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.emergency-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    color: white;
+    font-size: 2rem;
+}
+
+.emergency-details h4 {
+    color: #212529;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.emergency-details p {
+    color: #6c757d;
+    margin-bottom: 0.5rem;
+}
+
+.emergency-features {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e9ecef;
+}
+
+.feature-item {
+    text-align: center;
+    padding: 1rem;
+}
+
+.feature-item i {
+    font-size: 2rem;
+    color: #28a745;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.feature-item h6 {
+    color: #28a745;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.feature-item p {
+    color: #6c757d;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* Quick Actions */
+.quick-actions-section {
+    margin-top: 3rem;
+}
+
+.quick-actions-card {
+    background: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.quick-actions-card h3 {
+    color: #212529;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+.action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem 1rem;
+    border-radius: 0.5rem;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    height: 100%;
+    justify-content: center;
+}
+
+.action-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    color: white;
+}
+
+.action-btn i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.action-btn span {
+    font-weight: 600;
+}
+
+/* Form Styling */
+.form-control:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+}
+
+.form-label {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 0.5rem;
+}
+
+.form-label i {
+    margin-right: 0.5rem;
+    color: #dc3545;
+}
+
+/* Animations */
+.animate-fade-in {
+    animation: fadeIn 1s ease-in;
+}
+
+.animate-slide-up {
+    animation: slideUp 0.8s ease-out;
+}
+
+.animate-slide-up-delay {
+    animation: slideUp 0.8s ease-out 0.2s both;
+}
+
+.animate-scale-up {
+    animation: scaleUp 0.6s ease-out 0.4s both;
+}
+
+.animate-scale-up-delay {
+    animation: scaleUp 0.6s ease-out 0.6s both;
+}
+
+.animate-fade-in-delay {
+    animation: fadeIn 1s ease-in 0.3s both;
+}
+
+.animate-slide-down {
+    animation: slideDown 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { 
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDown {
+    from { 
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleUp {
+    from { 
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to { 
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 2rem 1rem;
+    }
+    
+    .contact-item {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .contact-icon {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+    
+    .emergency-item {
+        margin-bottom: 1rem;
+    }
+    
+    .action-btn {
+        padding: 1rem 0.5rem;
+    }
+}
+</style>
+{% endblock %}
